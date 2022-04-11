@@ -31,21 +31,31 @@ func CreateOrOpenDir(layer string) {
 		if os.IsNotExist(err) {
 			err = os.Mkdir(dirLayer, os.ModePerm)
 			FailError(err)
+
+			fmt.Printf("[+] success create directory layer : %s", layer)
+			return
 		} else {
 			FailError(err)
 		}
 	}
 
-	fmt.Println("create dir")
+	fmt.Printf("[+] success open directory layer : %s", layer)
 }
 
-func CreateOrOpenFile(name string, layer string) {
+func CreateOrOpenFile(name string, layer string, data string) {
 	dir, err := os.Getwd()
 	FailError(err)
 
 	fileLayer := fmt.Sprintf("%s/%s/%s.go", dir, layer, name)
-	_, err = os.OpenFile(fileLayer, os.O_RDWR|os.O_CREATE, os.ModePerm)
+	file, err := os.OpenFile(fileLayer, os.O_RDWR|os.O_CREATE, os.ModePerm)
 	FailError(err)
 
-	fmt.Println("create file")
+	fmt.Printf("[+] success create file name : %s.go", name)
+
+	defer file.Close()
+
+	_, err = file.Write([]byte(data))
+	FailError(err)
+
+	fmt.Printf("[+] success insert code to file : %s.go", name)
 }

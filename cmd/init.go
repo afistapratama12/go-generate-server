@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+	"go-gen-server/code"
 	"go-gen-server/config"
 
 	"github.com/spf13/cobra"
@@ -23,9 +25,12 @@ var initCmd = &cobra.Command{
 		// --db-postgres / --db-postgresql / --db-pg
 		// --db-sqlite
 
+		fmt.Println("args", args)
+
 		// test test
 		config.CreateOrOpenDir(config.RepoDir)
-		config.CreateOrOpenFile("user", config.RepoDir)
+
+		config.CreateOrOpenFile("user", config.RepoDir, code.InitMain)
 
 	},
 }
