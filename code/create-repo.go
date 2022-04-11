@@ -34,7 +34,7 @@ package code
 // 23. user
 // ============= sampai last GetById()
 
-var Repository = `package repository
+var repository = `package repository
 
 import (
 	"%s/entity" 
@@ -77,3 +77,7 @@ func (r *%sRepository) GetById(id string) (%s, error) {
 
 	return %s, nil
 }`
+
+func AddRepository() string {
+	return repository
+}

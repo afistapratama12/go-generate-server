@@ -11,7 +11,7 @@ import (
 
 var createCmd = &cobra.Command{
 	Use:     "create",
-	Aliases: []string{"c", "-c", "cr"},
+	Aliases: []string{"c", "cr"},
 	Short:   "create new service to layer",
 	Long:    "create service with layer entity, repository, service and controller",
 	Run: func(cmd *cobra.Command, args []string) {

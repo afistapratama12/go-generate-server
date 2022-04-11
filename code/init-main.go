@@ -1,6 +1,6 @@
 package code
 
-var InitMain = `package main
+var initMain = `package main
 
 import (
 	"github.com/gin-gonic/gin"
@@ -30,3 +30,7 @@ func main() {
 	r.Run()
 }
 `
+
+func AddInitMain() string {
+	return initMain
+}

@@ -8,7 +8,7 @@ import (
 
 var versionCmd = &cobra.Command{
 	Use:     "version",
-	Aliases: []string{"v", "-v"},
+	Aliases: []string{"v"},
 	Short:   "Get grader version",
 	Long:    "Get local grader version",
 	Run: func(cmd *cobra.Command, args []string) {

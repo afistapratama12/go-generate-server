@@ -6,7 +6,7 @@ package code
 // 3. user
 // 4. user
 
-var Controller = `package controller
+var controller = `package controller
 
 type %sController struct {
 
@@ -36,3 +36,7 @@ func (c *%s) Delete%s(c *gin.Context) {
 	
 }
 `
+
+func AddController() string {
+	return controller
+}

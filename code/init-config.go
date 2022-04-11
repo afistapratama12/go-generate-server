@@ -9,12 +9,12 @@ const (
 
 // format connection to driver db
 const (
-	DBMysql    = ""
+	DBMysql    = "%s:%s@tcp(%s:%s)/%s"
 	DBPostgres = ""
 	DBSqlite   = ""
 )
 
-var InitConfig = `package config
+var initConfig = `package config
 
 import (
 	"%s"
@@ -30,9 +30,29 @@ type Config struct {
 	SSL      string
 }
 
+func FailOnError(err error) {
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+}
+
 
 func ConnectDB() *gorm.DB {
+	var cred Config
+
+	cred.Username = os.Getenv("DB_USER")
+	cred.Password = os.Getenv("DB_PASS")
+	cred.Host = os.Getenv("DB_HOST")
+	cred.DBName = os.Getenv("DB_NAME")
+	cred.Port = os.Getenv("PORT")
+
+
 
 }
 
 `
+
+func AddInitConfig() string {
+	return initConfig
+}

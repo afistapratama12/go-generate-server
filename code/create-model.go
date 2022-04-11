@@ -9,17 +9,17 @@ import (
 // <Upper-name model> => ex : User
 // <Upper-name model>Input => ex : UserInput
 
-var ModelUp = `package entity
+var modelUp = `package entity
 
 type %s struct {`
 
-var ModelDown = "\n}"
+var modelDown = "\n}"
 
 func CreateModelStruct(name string, props []helper.PropsStruct) string {
 	upperName, _ := helper.ChangeToUpper(name)
 
 	// create Model
-	var dataModel = fmt.Sprintf(ModelUp, upperName)
+	var dataModel = fmt.Sprintf(modelUp, upperName)
 
 	for _, p := range props {
 		camelP := helper.ChangeSnaketoCamel(p.Name)
@@ -27,7 +27,7 @@ func CreateModelStruct(name string, props []helper.PropsStruct) string {
 		dataModel += fmt.Sprintf("\n\t%s %s", camelP, p.Type)
 	}
 
-	dataModel += ModelDown
+	dataModel += modelDown
 
 	// create ModelInput
 	dataModel += fmt.Sprintf("\ntype %sInput struct {", upperName)
@@ -41,7 +41,7 @@ func CreateModelStruct(name string, props []helper.PropsStruct) string {
 		}
 	}
 
-	dataModel += ModelDown
+	dataModel += modelDown
 
 	return dataModel
 }

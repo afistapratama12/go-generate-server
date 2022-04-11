@@ -8,7 +8,7 @@ package code
 // 3. "pakcage1/controller"
 // 4.
 
-var Routes = `package routes
+var routes = `package routes
 
 import (
 	"%s"
@@ -35,3 +35,7 @@ func %sRoute(r *gin.Engine) {
 	}
 }
 `
+
+func AddRoutes() string {
+	return routes
+}

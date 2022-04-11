@@ -2,13 +2,15 @@ package cmd
 
 import (
 	"fmt"
+	"go-gen-server/code"
+	"go-gen-server/config"
 
 	"github.com/spf13/cobra"
 )
 
 var initCmd = &cobra.Command{
 	Use:     "init",
-	Aliases: []string{"i", "-i", "in", "-in"},
+	Aliases: []string{"i", "in"},
 	Short:   "initialize new service",
 	Long:    "Initialize service with install default package gin-gonic and GORM",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -28,6 +30,9 @@ var initCmd = &cobra.Command{
 
 		// var defaultModel = "id:int,created_at:string,updated_at:string"
 
+		config.ProcessInitServer()
+
+		config.ProcessCreateOrOpenFile(config.MainFile, "", code.AddInitMain())
 	},
 }
 
