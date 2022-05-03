@@ -86,9 +86,13 @@ func RemoveAllService() {
 	}
 
 	for _, file := range files {
-		err := os.Remove(fmt.Sprintf("routes/%s", file.Name()))
-		if err != nil {
-			errs = append(errs, fmt.Errorf("[!] error remove routes : %s", err))
+		if file.Name() == "root.go" {
+			continue
+		} else {
+			err := os.Remove(fmt.Sprintf("routes/%s", file.Name()))
+			if err != nil {
+				errs = append(errs, fmt.Errorf("[!] error remove routes : %s", err))
+			}
 		}
 	}
 
