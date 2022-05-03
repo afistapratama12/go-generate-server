@@ -1,8 +1,19 @@
 package helper
 
 import (
+	"errors"
+	"fmt"
+	"os"
 	"strings"
 )
+
+func HandleErrorCmd(err error) {
+	if err != nil {
+		fmt.Println("error :", err.Error())
+		fmt.Println()
+		os.Exit(1)
+	}
+}
 
 // hello => Hello
 func ChangeToUpper(name string) (string, bool) {
@@ -15,7 +26,6 @@ func ChangeToUpper(name string) (string, bool) {
 
 // user => users
 // category => categories
-
 func ChangetoPlural(name string) (string, bool) {
 	if len(name) < 1 {
 		return "", false
@@ -64,4 +74,39 @@ func GetProps(props string) []PropsStruct {
 	}
 
 	return propStructs
+}
+
+type AllNameConverter struct {
+	Name            string
+	NameUpper       string
+	NamePlural      string
+	NameEntity      string
+	NameEntityInput string
+}
+
+func ConverterName(name string, optionLayer string) (AllNameConverter, error) {
+	allNameConverter := AllNameConverter{
+		Name: name,
+	}
+
+	nameUpper, ok := ChangeToUpper(name)
+	if !ok {
+		return allNameConverter, errors.New("error happen using helper ChangeToUpper in " + optionLayer)
+	}
+
+	allNameConverter.NameUpper = nameUpper
+
+	namePlural, ok := ChangetoPlural(name)
+	if !ok {
+		return allNameConverter, errors.New("error happen using helper ChangetoPlural in " + optionLayer)
+	}
+	allNameConverter.NamePlural = namePlural
+
+	nameEntity := "entity." + nameUpper
+	nameEntityInput := "entity." + nameUpper + "Input"
+
+	allNameConverter.NameEntity = nameEntity
+	allNameConverter.NameEntityInput = nameEntityInput
+
+	return allNameConverter, nil
 }

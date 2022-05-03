@@ -1,3 +1,8 @@
+build:
+	go build
+	rm ~/go-gen-server/go-gen
+	mv ./go-gen-server ~/go-gen-server/go-gen
+
 linux: 
 	GOOS=linux GOARCH=amd64 go build ${LDFLAGS} -o grader-cli-linux-amd64 . ; \
 	cd - >/dev/null

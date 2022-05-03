@@ -1,8 +1,6 @@
 package main
 
-import (
-	"go-gen-server/cmd"
-)
+import "go-gen-server/cmd"
 
 // list cmd
 

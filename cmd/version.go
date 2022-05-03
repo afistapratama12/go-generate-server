@@ -12,7 +12,7 @@ var versionCmd = &cobra.Command{
 	Short:   "Get grader version",
 	Long:    "Get local grader version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("0.1")
+		fmt.Println("0.4")
 	},
 }
 

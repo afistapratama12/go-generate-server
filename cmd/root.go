@@ -8,9 +8,9 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "go-gen-server",
+	Use:   "go-gen",
 	Short: "Generator server api using cli",
-	Long:  `go-gen-server is a tool for generator server api using cli.`,
+	Long:  `go-gen is a tool for generator server api using cli.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
