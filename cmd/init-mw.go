@@ -19,7 +19,12 @@ var initMwCmd = &cobra.Command{
 
 		// install jwt-go github.com/dgrijalva/jwt-go
 		if len(args) < 1 {
-			fmt.Println("please insert auth properties, ex : go-gen-server init-mw user_id:int,role:string")
+			fmt.Println(`
+\033[31m ERROR: init-middleware command must have param \033[31m
+
+go-gen init-mw [PARAM]
+			
+example : go-gen init-mw user_id:int,role:string`)
 			os.Exit(1)
 		} else {
 			ProcessInitMiddlware(args[0])

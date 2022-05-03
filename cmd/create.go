@@ -38,10 +38,13 @@ example : go-gen create users name:string,email:string,password:string,role:stri
 		// --query-order-by-desc / --q-order-by-desc (get all desc with default param: created_at)
 		// --query-order-by-asc / --q-order-by-asc (get all asc with default param: created_at)
 
-		fmt.Println("flag option:", createOpts)
-
 		if len(args) < 1 {
-			fmt.Println("please insert entity name, ex : go-gen-server create user")
+			fmt.Println(`
+\033[31m ERROR: create command must have entity name \033[31m
+
+go-gen create [ENTITY-NAME] [PROPERTIES]
+
+example : go-gen create user name:string,email:string,password:string`)
 			os.Exit(1)
 		} else {
 			if len(args) == 1 {

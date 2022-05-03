@@ -40,11 +40,17 @@ note : use '.' if you want create service in recent directory
 		// --db-sqlite
 
 		if len(args) < 1 {
-			fmt.Println("please insert project name, ex : go-gen-server init my-go-app")
-			fmt.Println(`if you want to generate service code in this directory please using "." , ex : go-gen-server init .`)
+			fmt.Println(`
+\033[31m ERROR: init command must have project name \033[31m
+
+go-gen init [PROJECT_NAME]
+			
+example : go-gen init my-go-app
+
+if you want to generate service code in this directory please using "." , ex : go-gen init .`)
 			os.Exit(1)
 		} else if len(args) > 1 {
-			fmt.Println("error: cannot using the option flag, please try again")
+			fmt.Println("\033[31m ERROR: cannot using the option flag, please try again\033[31m")
 			os.Exit(1)
 		} else {
 			ProcessInit(args[0])

@@ -23,11 +23,18 @@ note : user '.' to remove all entity service in current directory
 		fmt.Println("running remove generate")
 
 		if len(args) < 1 {
-			fmt.Println("please insert entity name, ex : go-gen remove users")
-			fmt.Println(`if you want to delete all entity service this directory please using "." , ex : go-gen remove .`)
+			fmt.Println(`
+\033[31m ERROR: remove command must have entityname \033[31m
+
+go-gen remove [ENTITY_NAME]
+
+example : go-gen remove users
+
+if you want to delete all entity service this directory please using "." , ex : go-gen remove .`)
 			os.Exit(1)
 		} else if len(args) > 1 {
-			fmt.Println("error: cannot using the option flag, please try again")
+			fmt.Println("\033[31m ERROR: cannot using option flag \033[31m")
+			fmt.Println()
 			os.Exit(1)
 		} else {
 			ProcessRemove(args[0])
