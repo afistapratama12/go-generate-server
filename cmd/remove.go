@@ -23,9 +23,8 @@ note : user '.' to remove all entity service in current directory
 		fmt.Println("running remove generate")
 
 		if len(args) < 1 {
+			fmt.Println("\033[31mERROR: remove command must have entity name\033[0m")
 			fmt.Println(`
-\033[31m ERROR: remove command must have entityname \033[31m
-
 go-gen remove [ENTITY_NAME]
 
 example : go-gen remove users

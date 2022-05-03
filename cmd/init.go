@@ -40,9 +40,9 @@ note : use '.' if you want create service in recent directory
 		// --db-sqlite
 
 		if len(args) < 1 {
-			fmt.Println(`
-\033[31m ERROR: init command must have project name \033[31m
+			fmt.Println("\033[31mERROR: init command must have project name\033[0m")
 
+			fmt.Println(`
 go-gen init [PROJECT_NAME]
 			
 example : go-gen init my-go-app

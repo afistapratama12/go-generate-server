@@ -39,9 +39,9 @@ example : go-gen create users name:string,email:string,password:string,role:stri
 		// --query-order-by-asc / --q-order-by-asc (get all asc with default param: created_at)
 
 		if len(args) < 1 {
-			fmt.Println(`
-\033[31m ERROR: create command must have entity name \033[31m
+			fmt.Println("\033[31mERROR: create command must have entity name\033[0m")
 
+			fmt.Println(`
 go-gen create [ENTITY-NAME] [PROPERTIES]
 
 example : go-gen create user name:string,email:string,password:string`)
