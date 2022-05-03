@@ -65,7 +65,9 @@ func AddRoutesInMain(name string, serviceName string) {
 func RemoveRoutesInMain(name string) {
 	read := OpenFileMain()
 
-	sep := fmt.Sprintf(`routes[.]%sRoute[(]r[)]\n`, name)
+	allNameStr, _ := helper.ConverterName(name, "entity")
+
+	sep := fmt.Sprintf(`routes[.]%sRoute[(]r[)]`, allNameStr.NameUpper)
 
 	regex, err := regexp.Compile(sep)
 	if err != nil {
@@ -83,7 +85,6 @@ func RemoveRoutesInMain(name string) {
 		log.Fatal(err)
 		return
 	}
-
 }
 
 func CheckImportRoutes(serviceName string, split []string) []string {
