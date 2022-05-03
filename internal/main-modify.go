@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -35,7 +36,7 @@ func WriteNewMain(name string, newRead string, fileLayer string) {
 	err := os.WriteFile(fileLayer, []byte(newRead), 0644)
 	FailError(err)
 
-	fmt.Printf("\n[+] success insert routes code to file : %s.go", name)
+	fmt.Printf("\n[+] success insert new code file : %s.go", name)
 }
 
 func AddRoutesInMain(name string, serviceName string) {
@@ -46,9 +47,17 @@ func AddRoutesInMain(name string, serviceName string) {
 	allNameStr, _ := helper.ConverterName(name, "entity")
 
 	addImport := CheckImportRoutes(serviceName, split)
-	newSplit := AddRoutesMain(allNameStr.NameUpper, addImport)
 
-	newRead := strings.Join(newSplit, "\n")
+	readImport := strings.Join(addImport, "\n")
+
+	sepAddRoute := `r[.]Run[(][)]\n`
+
+	regex, err := regexp.Compile(sepAddRoute)
+	FailError(err)
+
+	newRoute := fmt.Sprintf("routes.%sRoute(r)", allNameStr.NameUpper)
+
+	newRead := regex.ReplaceAllString(readImport, newRoute+"\n\t"+"r.Run()"+"\n")
 
 	WriteNewMain(name, newRead, "main.go")
 }
@@ -56,13 +65,25 @@ func AddRoutesInMain(name string, serviceName string) {
 func RemoveRoutesInMain(name string) {
 	read := OpenFileMain()
 
-	split := strings.Split(read, fmt.Sprintf("\troutes.%sRoute(r)", name))
+	sep := fmt.Sprintf(`routes[.]%sRoute[(]r[)]\n`, name)
 
-	newRead := strings.Join(split, "")
+	regex, err := regexp.Compile(sep)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	newRead := regex.ReplaceAllString(read, "")
 
 	WriteNewMain(name, newRead, "main.go")
 
 	fmt.Printf("\n[+] success remove routes code from file : %s.go", name)
+
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
 }
 
 func CheckImportRoutes(serviceName string, split []string) []string {
@@ -116,21 +137,6 @@ func CheckImportRoutes(serviceName string, split []string) []string {
 	} else {
 		newSplit = split
 	}
-
-	return newSplit
-}
-
-func AddRoutesMain(nameUpper string, split []string) []string {
-	var (
-		newSplit []string
-		start    = make([]string, len(split))
-	)
-
-	copy(start, split[:len(split)-4])
-
-	start = append(start, fmt.Sprintf("\troutes.%sRoute(r)", nameUpper))
-
-	newSplit = append(start, split[len(split)-5:]...)
 
 	return newSplit
 }
