@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func AddRoutesInMain(name string, serviceName string) {
+func OpenFileMain() string {
 	dir, err := os.Getwd()
 	FailError(err)
 
@@ -27,6 +27,20 @@ func AddRoutesInMain(name string, serviceName string) {
 
 	read := string(body)
 
+	return read
+}
+
+func WriteNewMain(name string, newRead string, fileLayer string) {
+
+	err := os.WriteFile(fileLayer, []byte(newRead), 0644)
+	FailError(err)
+
+	fmt.Printf("\n[+] success insert routes code to file : %s.go", name)
+}
+
+func AddRoutesInMain(name string, serviceName string) {
+	read := OpenFileMain()
+
 	split := strings.Split(read, "\n")
 
 	allNameStr, _ := helper.ConverterName(name, "entity")
@@ -36,10 +50,19 @@ func AddRoutesInMain(name string, serviceName string) {
 
 	newRead := strings.Join(newSplit, "\n")
 
-	err = os.WriteFile(fileLayer, []byte(newRead), 0644)
-	FailError(err)
+	WriteNewMain(name, newRead, "main.go")
+}
 
-	fmt.Printf("\n[+] success insert routes code to file : %s.go", name)
+func RemoveRoutesInMain(name string) {
+	read := OpenFileMain()
+
+	split := strings.Split(read, fmt.Sprintf("\troutes.%sRoute(r)", name))
+
+	newRead := strings.Join(split, "")
+
+	WriteNewMain(name, newRead, "main.go")
+
+	fmt.Printf("\n[+] success remove routes code from file : %s.go", name)
 }
 
 func CheckImportRoutes(serviceName string, split []string) []string {

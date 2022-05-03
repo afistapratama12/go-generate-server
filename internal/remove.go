@@ -36,10 +36,7 @@ func ProcessRemove(nameEntity string) {
 		errs = append(errs, fmt.Errorf("[!] error remove controller : %s", err))
 	}
 
-	err = RemoteRouteInjectInMain(nameEntity)
-	if err != nil {
-		errs = append(errs, fmt.Errorf("[!] error remove controller : %s", err))
-	}
+	RemoveRoutesInMain(nameEntity)
 
 	if len(errs) > 0 {
 		errMsg := ""
@@ -48,12 +45,7 @@ func ProcessRemove(nameEntity string) {
 		}
 
 		fmt.Println(errMsg)
-	} else {
-		fmt.Printf("\n[+] success remove service entity : %s\n", nameEntity)
 	}
-}
 
-func RemoteRouteInjectInMain(nameEntity string) error {
-	// delete route in main.go
-	return nil
+	fmt.Printf("\n[+] success remove service entity : %s\n", nameEntity)
 }
