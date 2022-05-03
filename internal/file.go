@@ -2,6 +2,8 @@ package internal
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
 	"os"
 )
 
@@ -62,4 +64,25 @@ func CreateOrOpenFile(name string, layer string, data string) {
 	FailError(err)
 
 	fmt.Printf("\n[+] success insert code to file : %s.go", name)
+}
+
+func OpenFile(fileName string) string {
+	dir, err := os.Getwd()
+	FailError(err)
+
+	var fileLayer = fmt.Sprintf("%s/%s", dir, fileName)
+
+	file, err := os.OpenFile(fileLayer, os.O_RDWR|os.O_CREATE, os.ModePerm)
+	FailError(err)
+
+	defer file.Close()
+
+	body, err := ioutil.ReadAll(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	read := string(body)
+
+	return read
 }

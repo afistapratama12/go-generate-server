@@ -42,6 +42,9 @@ func ProcessInitMiddlware(param string) {
 	// auth
 	internal.ProcessCreateOrOpenFile("config", internal.AuthDir, middleware.AddAuthService(param))
 
+	// modify routes root.go
+	internal.ModifyRoutesRoot()
+
 }
 
 func init() {

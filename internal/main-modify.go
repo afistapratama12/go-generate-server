@@ -3,33 +3,11 @@ package internal
 import (
 	"fmt"
 	"go-gen-server/helper"
-	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
 	"strings"
 )
-
-func OpenFileMain() string {
-	dir, err := os.Getwd()
-	FailError(err)
-
-	var fileLayer = fmt.Sprintf("%s/main.go", dir)
-
-	file, err := os.OpenFile(fileLayer, os.O_RDWR|os.O_CREATE, os.ModePerm)
-	FailError(err)
-
-	defer file.Close()
-
-	body, err := ioutil.ReadAll(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	read := string(body)
-
-	return read
-}
 
 func WriteNewMain(name string, newRead string, fileLayer string) {
 
@@ -40,7 +18,7 @@ func WriteNewMain(name string, newRead string, fileLayer string) {
 }
 
 func AddRoutesInMain(name string, serviceName string) {
-	read := OpenFileMain()
+	read := OpenFile("main.go")
 
 	split := strings.Split(read, "\n")
 
@@ -63,7 +41,7 @@ func AddRoutesInMain(name string, serviceName string) {
 }
 
 func RemoveRoutesInMain(name string) {
-	read := OpenFileMain()
+	read := OpenFile("main.go")
 
 	allNameStr, _ := helper.ConverterName(name, "entity")
 
