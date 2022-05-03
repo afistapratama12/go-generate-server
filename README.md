@@ -11,6 +11,12 @@ Support driver : `mysql`, `postgres`, `sqlite`
 ## installation
 > still support for mac
 
+- clone this repository
+
+```bash
+git clone https://github.com/afistapratama12/go-generate-server.git
+```
+
 - running Makefile in this root directory
 
 ```bash
