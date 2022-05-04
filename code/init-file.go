@@ -1,7 +1,6 @@
 package code
 
-var DotEnv = `
-# This file is used to configure the application.
+var DotEnv = `# This file is used to configure the application.
 DB_USER=
 DB_PASS=
 DB_HOST=
@@ -12,8 +11,7 @@ DB_PORT=
 JWT_SECRET=
 `
 
-var ExampleEnv = `
-# This file is used to configure the application.
+var ExampleEnv = `# This file is used to configure the application.
 DB_USER=root
 DB_PASS=admin
 DB_HOST=localhost
@@ -24,7 +22,7 @@ DB_PORT=3306
 JWT_SECRET=example-secret
 `
 
-var Gitignore = `
+var Gitignore = `# ignore all following files
 .env
 /node_modules
 /public
