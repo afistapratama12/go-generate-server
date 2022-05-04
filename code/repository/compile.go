@@ -44,7 +44,7 @@ func compileRepoCodeString(name, packageName, nameUpper, namePlural, nameEntity,
 		repoStrCreate = fmt.Sprintf(repositoryFuncCreate, name, nameEntityInput)
 
 		repoStrUpdate = fmt.Sprintf(repositoryFuncUpdate, name, nameEntityInput)
-		repoStrDelete = fmt.Sprintf(repositoryFuncDelete, name)
+		repoStrDelete = fmt.Sprintf(repositoryFuncDelete, name, nameEntity)
 	)
 
 	return repoStrHead + repoStrInit + repoStrGetAll + repoStrGetById + repoStrCreate + repoStrUpdate + repoStrDelete

@@ -103,9 +103,13 @@ func (r *%sRepository) UpdateById(id string, input %s) (error) {
 
 // example
 // user
+// entity.User
 var repositoryFuncDelete = `
 
-// TODO: update soon
 func (r *%sRepository) DeleteById(id string) (error) {
+	if err := r.db.Delete(&%s{}, id).Error; err != nil {
+		return err
+	}
+
 	return nil
 }`
