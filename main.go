@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"regexp"
-)
+import "go-gen-server/cmd"
 
 // TODO: planning
 
@@ -26,16 +23,5 @@ import (
 // create download
 
 func main() {
-	//cmd.Execute()
-
-	var data = `var (
-		DB = config.ConnectDB()
-	)`
-
-	regex, _ := regexp.Compile("DB = config[.]ConnectDB[(][)]")
-
-	newData := regex.ReplaceAllString(data, "DB = config.ConnectDB()\n\tauthService = auth.NewAuthService()\n\tMainMiddleware = middleware.Middleware(authService)")
-
-	fmt.Println(newData)
-
+	cmd.Execute()
 }
